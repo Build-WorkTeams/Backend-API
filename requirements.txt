@@ -1,0 +1,6 @@
+django>=4.2,<4.3
+djangorestframework
+markdown
+django-filter
+drf-spectacular
+django-cors-headers
