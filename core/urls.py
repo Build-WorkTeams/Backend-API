@@ -19,13 +19,21 @@ from django.urls import path
 from django.views.generic import RedirectView
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from accounts.views import LoginView, RegisterView
+from knox.views import LogoutView, LogoutAllView
+
 
 urlpatterns = [
     path('', RedirectView.as_view(pattern_name='swagger-ui')),
     path('admin/', admin.site.urls),
+    path('api/accounts/login/', LoginView.as_view(), name='knox_login'),
+    path('api/accounts/logout/', LogoutView.as_view(), name='knox_logout'),
+    path('api/accounts/logoutall/', LogoutAllView.as_view(), name='knox_logoutall'),
+    path('api/accounts/register/', RegisterView.as_view(), name='register'),
     
 ]
 
+# Swagger URLs
 urlpatterns += [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
