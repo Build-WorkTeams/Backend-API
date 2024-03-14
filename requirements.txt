@@ -4,3 +4,4 @@ markdown
 django-filter
 drf-spectacular
 django-cors-headers
+python-decouple
