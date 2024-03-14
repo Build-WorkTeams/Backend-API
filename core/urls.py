@@ -18,9 +18,20 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import RedirectView
 
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from accounts.views import LoginView, RegisterView
-from knox.views import LogoutView, LogoutAllView
+from drf_spectacular.views import (
+    SpectacularAPIView, 
+    SpectacularRedocView, 
+    SpectacularSwaggerView
+)
+from accounts.views import (
+    LoginView, 
+    RegisterView,
+    UserView
+)
+from knox.views import (
+    LogoutView, 
+    LogoutAllView
+)
 
 
 urlpatterns = [
@@ -30,6 +41,7 @@ urlpatterns = [
     path('api/accounts/logout/', LogoutView.as_view(), name='knox_logout'),
     path('api/accounts/logoutall/', LogoutAllView.as_view(), name='knox_logoutall'),
     path('api/accounts/register/', RegisterView.as_view(), name='register'),
+    path('api/accounts/user/', UserView.as_view(), name="user_detail"),
     
 ]
 
