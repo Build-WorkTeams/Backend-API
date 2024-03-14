@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from django.utils import timezone
+from .env import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cemqgx7)^=u!nzj$0-)gx7ie$qz5*lr_p250dn!#o@=5+=#m5('
+SECRET_KEY = config("DJANGO_SECRET_KEY", default="django-insecure-cemqgx7)^=u!nzj$0-)gx7ie$qz5*lr_p250dn!#o@=5+=#m5(")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -150,9 +151,11 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+TTL = config("KNOX_TOKEN_TTL", default="0, 30", cast=lambda x: [int(s.strip()) for s in x.split(",")])
 REST_KNOX = {
-  'TOKEN_TTL': timezone.timedelta(minutes=1),
+  'TOKEN_TTL': timezone.timedelta(hours=TTL[0], minutes=TTL[1]),
   'AUTO_REFRESH': True,
+  'MIN_REFRESH_INTERVAL': config('KNOX_REFRESH_INTERVAL', default='60', cast=int)
 }
 
 SPECTACULAR_SETTINGS = {
