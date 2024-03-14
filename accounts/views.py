@@ -5,7 +5,7 @@ from rest_framework.authtoken.serializers import authenticate
 from rest_framework import permissions
 from rest_framework import generics
 from knox.views import LoginView as KnoxLoginView
-from drf_spectacular.utils import extend_schema_view, extend_schema, inline_serializer
+from drf_spectacular.utils import extend_schema, inline_serializer
 
 from .serializers import RegisterSerializer, UserSerializer
 
