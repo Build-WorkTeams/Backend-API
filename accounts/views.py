@@ -4,7 +4,11 @@ from rest_framework.response import Response
 from rest_framework.authtoken.serializers import authenticate
 from rest_framework import permissions
 from rest_framework import generics
-from knox.views import LoginView as KnoxLoginView
+from knox.views import (
+    LoginView as KnoxLoginView,
+    LogoutView as KnoxLogoutView,
+    LogoutAllView as KnoxLogoutAllView
+)
 from drf_spectacular.utils import extend_schema, inline_serializer
 
 from .serializers import RegisterSerializer, UserSerializer
@@ -54,6 +58,7 @@ class LoginView(KnoxLoginView):
             return super(LoginView, self).post(request, format=None)
         return Response({"message": "Invalid Username/password"}, 401)
     
+
 class UserView(generics.RetrieveAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
@@ -65,3 +70,21 @@ class UserView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         user = UserSerializer(request.user)
         return Response(user.data, status.HTTP_200_OK)
+    
+
+class LogoutView(KnoxLogoutView):
+    
+    @extend_schema(
+            responses={204: None}
+    )
+    def post(self, *args, **kwargs):
+        return super().post(*args, **kwargs)
+    
+
+class LogoutAllView(KnoxLogoutAllView):
+    
+    @extend_schema(
+            responses={204: None}
+    )
+    def post(self, *args, **kwargs):
+        return super().post(*args, **kwargs)
