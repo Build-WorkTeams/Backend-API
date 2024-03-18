@@ -142,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^http://127.0.0.1:.*",
+    r".*",
 ]
 
 REST_FRAMEWORK = {
