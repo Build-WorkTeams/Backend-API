@@ -27,7 +27,10 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", default="django-insecure-cemqgx7)^=u!nz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = [".onrender.com"]
+ALLOWED_HOSTS = []
+
+if config("ALLOWED_HOSTS"):
+    ALLOWED_HOSTS += config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
 
 
 # Application definition
@@ -137,6 +140,10 @@ STATIC_ROOT = BASE_DIR / "static/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^http://127.0.0.1:.*",
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (        
