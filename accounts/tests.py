@@ -8,7 +8,7 @@ class UserManagerTest(TestCase):
         self.assertIsInstance(User.objects, UserManager)
 
     def test_user_creation(self):
-        user = User.objects.create_user(email="example@mail.com", password="abc123")
+        User.objects.create_user(email="example@mail.com", password="abc123")
         self.assertEqual(User.objects.count(), 1)
 
 
