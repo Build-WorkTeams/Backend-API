@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Local Packages
     'accounts',
+    'tasks',
 
     # Third Party Packages
     'rest_framework',
