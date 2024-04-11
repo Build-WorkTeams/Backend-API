@@ -29,4 +29,4 @@ jobs:
       env:
         ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS }}
       run: |
-        python manage.py test
+        python src/manage.py test
