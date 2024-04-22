@@ -28,6 +28,6 @@ jobs:
     - name: Run Tests
       env:
         ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-        TOKEN_TTL: ${{ secrets.TOKEN_TTL }}
+        TOKEN_TTL: "30, 2"
       run: |
         python src/manage.py test
