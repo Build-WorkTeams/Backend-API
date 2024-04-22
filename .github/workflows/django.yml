@@ -27,6 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
-        ALLOWED_HOSTS: ${{ vars.ALLOWED_HOSTS }}
+        ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+        TOKEN_TTL: ${{ secrets.TOKEN_TTL }}
       run: |
         python src/manage.py test
