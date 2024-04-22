@@ -6,3 +6,5 @@ drf-spectacular
 django-rest-knox
 django-cors-headers
 python-decouple
+dj-rest-auth[with_social]
+djangorestframework-simplejwt
